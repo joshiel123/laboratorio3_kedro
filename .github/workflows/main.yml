@@ -2,17 +2,21 @@ name: SonarCloud Analysis
 on:
   push:
     branches:
-      - main
+      - master  # <--- CAMBIADO de main a master
   pull_request:
+    branches:
+      - master  # <--- CAMBIADO de main a master
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
-    name: SonarCloud
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Importante para que Sonar vea el historial
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
